@@ -23,8 +23,8 @@ int main()
 
 	cout << "\n AppFiltro \n" << endl;
 	cout << "Desenvolvido por Matheus Milanezi \n" << endl;
-	cout << "Version Alpha 0.0.2\n" << endl;
-	cout << "Instruções de uso: \n" << endl;
+	cout << "Version Alpha 1.4.2\n" << endl;
+	cout << "Instrucoes de uso: \n" << endl;
 	cout << "Insira o nome da foto a ser modificada!\n" << endl;
 	cout << "A foto deve estar dentro da pasta 'textures' antes da execucao do app.\n" << endl;
 	cout << "O nome deve ser escrito junto do tipo.\n" << endl;

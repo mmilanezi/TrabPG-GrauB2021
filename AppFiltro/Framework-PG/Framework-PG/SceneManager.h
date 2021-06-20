@@ -3,6 +3,10 @@
 #include "Shader.h"
 #include "Sprite.h" 
 
+#include <iostream>
+#include <string>
+
+
 // GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -42,7 +46,17 @@ public:
 	void addShader04(string vFilename, string fFilename);
 	void addShader05(string vFilename, string fFilename);
 	void addShader06(string vFilename, string fFilename);
+	void addShader07(string vFilename, string fFilename);
+
+	int getOp();
+	void setOp(int op);
 	
+	string getNomeFoto01();
+	string getNomeFoto02();
+	string getNomeFoto03();
+	void setNomeFoto01(string nome);
+	void setNomeFoto02(string nome);
+	void setNomeFoto03(string nome);
 
 
 	void setupScene(); //antigo setupGeometry
@@ -55,6 +69,7 @@ private:
 	GLFWwindow *window;
 
 	//Programa de shader (por enquanto, assumimos apenas 1 instância)
+	//aqui da pra por mais shaders
 	Shader * shader00;
 	Shader * shader01;
 	Shader * shader02;
@@ -62,8 +77,17 @@ private:
 	Shader * shader04;
 	Shader * shader05;
 	Shader * shader06;
-
-	//aqui da pra por mais shaders
+	Shader * shader07;
+	
+	//variaveis privadas de carregamento de nome de foto
+	//const char * caminhoFoto;
+	string nomeFoto01;
+	string nomeFoto02;
+	string nomeFoto03;
+	
+	string nomeShader01;
+	
+	int op;
 
 	//Câmera 2D - Matriz de projeção (ortográfica) com os limites em x,y
 	glm::vec4 ortho2D; //xmin, xmax, ymin, ymax

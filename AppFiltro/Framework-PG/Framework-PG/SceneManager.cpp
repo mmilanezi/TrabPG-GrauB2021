@@ -4,11 +4,49 @@ Matheus Grassi Milanezi
 */
 
 #include "SceneManager.h"
+#include <iostream>
+#include <string>
 
 //static controllers for mouse and keyboard
 static bool keys[1024];
 static bool resized;
 static GLuint width, height;
+
+
+
+
+int SceneManager::getOp() {
+	return op;
+}
+void SceneManager::setOp(int opcao) {
+	op = opcao;
+}
+
+string SceneManager::getNomeFoto01() {
+	return nomeFoto01;
+}
+
+string SceneManager::getNomeFoto02() {
+	return nomeFoto02;
+}
+
+string SceneManager::getNomeFoto03() {
+	return nomeFoto03;
+}
+
+void SceneManager::setNomeFoto01(string nomef) {
+	nomeFoto01 = nomef;
+}
+
+void SceneManager::setNomeFoto02(string nomef) {
+	nomeFoto02 = nomef;
+}
+void SceneManager::setNomeFoto03(string nomef) {
+	nomeFoto03 = nomef;
+}
+
+
+
 
 SceneManager::SceneManager()
 {
@@ -34,7 +72,7 @@ void SceneManager::initializeGraphics()
 	glfwInit();
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	window = glfwCreateWindow(width, height, "Programa de edição de imagens", nullptr, nullptr);
+	window = glfwCreateWindow(width, height, "Programa de edicao de imagens         version ALPHA 1.3.8 ", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
 	// Set the required callback functions
@@ -52,9 +90,47 @@ void SceneManager::initializeGraphics()
 	}
 
 	// Build and compile our shader program - aqui declarar outros shaders
-	addShader00("../shaders/transformations.vs", "../shaders/filtroCinza.frag");
-	addShader01("../shaders/transformations.vs", "../shaders/FiltroRosa.frag");
+	if (op == 0) {
+		addShader00("../shaders/transformations.vs", "../shaders/filtroNormal.frag");
+		cout << "entrou aqui";
+	}
+	if (op == 1) {
+		addShader00("../shaders/transformations.vs", "../shaders/filtroRosa.frag");
+	}
+	if (op == 2) {
+		addShader00("../shaders/transformations.vs", "../shaders/filtroAmarelo.frag");
+	}
+	if (op == 3) {
+		addShader00("../shaders/transformations.vs", "../shaders/filtroCinza.frag");
+	}
+	if (op == 4) {
+		addShader00("../shaders/transformations.vs", "../shaders/filtroVerde.frag");
+	}
+	if (op == 5) {
+		addShader00("../shaders/transformations.vs", "../shaders/filtroLaranja.frag");
+	}
+	if (op == 6) {
+		addShader00("../shaders/transformations.vs", "../shaders/filtroAzul.frag");
+	}
+	if (op == 7) {
+		addShader00("../shaders/transformations.vs", "../shaders/filtroArcoIris.frag");
+	}
+	
+	
+	/*
+	
+	addShader01("../shaders/transformations.vs", "../shaders/filtroRosa.frag");
+	addShader02("../shaders/transformations.vs", "../shaders/filtroAmarelo.frag");
+	addShader03("../shaders/transformations.vs", "../shaders/filtroCinza.frag");
+	addShader04("../shaders/transformations.vs", "../shaders/filtroVerde.frag");
+	addShader05("../shaders/transformations.vs", "../shaders/filtroLaranja.frag");
+	addShader06("../shaders/transformations.vs", "../shaders/filtroAzul.frag");
+	addShader07("../shaders/transformations.vs", "../shaders/filtroArcoIris.frag");
 
+
+
+	*/
+	
 
 	//setup the scene -- LEMBRANDO QUE A DESCRIÇÃO DE UMA CENA PODE VIR DE ARQUIVO(S) DE 
 	// CONFIGURAÇÃO
@@ -66,17 +142,65 @@ void SceneManager::initializeGraphics()
 
 void SceneManager::addShader00(string vFilename, string fFilename)
 {
-	shader00 = new Shader (vFilename.c_str(), fFilename.c_str());
+	shader00 = new Shader (vFilename.c_str(), fFilename.c_str());//normal
 	
 
 }
+/*
 
 void SceneManager::addShader01(string vFilename, string fFilename)
 {
-	
-	shader01 = new Shader(vFilename.c_str(), fFilename.c_str());//shader de filtro escala de rosa
+
+	shader01 = new Shader(vFilename.c_str(), fFilename.c_str());//rosa
 
 }
+
+void SceneManager::addShader02(string vFilename, string fFilename)
+{
+
+	shader02 = new Shader(vFilename.c_str(), fFilename.c_str());//amarelo
+
+}
+
+void SceneManager::addShader03(string vFilename, string fFilename)
+{
+	shader03 = new Shader(vFilename.c_str(), fFilename.c_str());//cinza
+
+
+}
+
+void SceneManager::addShader04(string vFilename, string fFilename)
+{
+
+	shader04 = new Shader(vFilename.c_str(), fFilename.c_str());//verde
+
+}
+
+void SceneManager::addShader05(string vFilename, string fFilename)
+{
+
+	shader05 = new Shader(vFilename.c_str(), fFilename.c_str());//laranja
+
+}
+void SceneManager::addShader06(string vFilename, string fFilename)
+{
+	shader06 = new Shader(vFilename.c_str(), fFilename.c_str());//azul
+
+
+}
+
+void SceneManager::addShader07(string vFilename, string fFilename)
+{
+
+	shader07 = new Shader(vFilename.c_str(), fFilename.c_str());//arco-iris
+
+}
+
+
+
+*/
+
+
 
 
 void SceneManager::key_callback(GLFWwindow * window, int key, int scancode, int action, int mode)
@@ -168,6 +292,11 @@ void SceneManager::finish()
 
 void SceneManager::setupScene()
 {
+	
+
+
+	
+
 	//Criação dos Sprites iniciais -- pode-se fazer métodos de criação posteriormente
 	
 	//Mínimo: posicao e escala e ponteiro para o shader
@@ -181,7 +310,7 @@ void SceneManager::setupScene()
 	obj = new Sprite;
 	obj->setPosition(glm::vec3(400.0f, 300.0f, 0.0));
 	obj->setDimension(glm::vec3(200.0f, 200.0f, 1.0f));
-	obj->setShader(shader01);
+	obj->setShader(shader00);
 	objects.push_back(obj); //adiciona o segundo obj
 
 	//Adicionando mais um
@@ -191,15 +320,18 @@ void SceneManager::setupScene()
 	obj->setShader(shader00);
 	objects.push_back(obj); //adiciona o terceiro obj
 
+	//chamada de menu para inserção de fotos.
+
+	
+
 	//Carregamento das texturas (pode ser feito intercalado na criação)
 	//Futuramente, utilizar classe de materiais e armazenar dimensoes, etc
-	unsigned int texID = loadTexture("../textures/lena.png");
+	unsigned int texID;
+	texID = loadTexture("../textures/" + nomeFoto01);
 	objects[0]->setTexture(texID);
-
-	//texID = loadTexture("../textures/wall.jpg");
-	texID = loadTexture("../textures/mario.png");
+	texID = loadTexture("../textures/" + nomeFoto02);
 	objects[1]->setTexture(texID);
-	texID = loadTexture("../textures/lena.png");
+	texID = loadTexture("../textures/" + nomeFoto03);
 	objects[2]->setTexture(texID);
 
 	//Definindo a janela do mundo (ortho2D)
@@ -287,3 +419,5 @@ unsigned int SceneManager::loadTexture(string filename)
 
 	return texture;
 }
+
+

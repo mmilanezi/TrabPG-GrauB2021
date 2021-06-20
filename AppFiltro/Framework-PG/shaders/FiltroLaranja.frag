@@ -25,6 +25,6 @@ void main() //alteração no shader no que via ser mapeado nos objetos
 
     //valor final sempre vec4
     //color = vec4(1.0, 1.0 , 0.0 , 1.0); // amarelo
-    //color = vec4(1.0, 0.5 , 0.0 , 1.0); // laranja
+    color = vec4(1.0, 0.5*media , 0.0 , 1.0); // laranja
     //color = vec4(0.0, 0.0 , 1.0 , 1.0);
 }

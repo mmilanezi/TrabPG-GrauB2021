@@ -20,7 +20,8 @@ void main() //alteração no shader no que via ser mapeado nos objetos
     //color = vec4(media, media , media, 1.0); // filtro escala de cinza
     //color = vec4(0.0 , media , 0.0 , 1.0); // filtro verde
     //color = vec4(0.5 , media , 0.5 , 1.0); // filtro escalas de rosa
-
+	color = vec4(0.0 , 0.0 , media , 1.0); // filtro azul
+    
 
 
     //valor final sempre vec4
